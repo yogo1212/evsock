@@ -22,7 +22,7 @@ typedef enum {
 	// TODO implement!
 	// EVTSOCK_CMD_BIND_TCP,
 	/* only available for SOCKS5 */
-	// EVTSOCK_CMD_BIND_UDP,
+	EVTSOCK_CMD_BIND_UDP,
 } evtsock_command_t;
 
 typedef enum {
