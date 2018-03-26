@@ -130,7 +130,7 @@ if (cmd == EVTSOCK_CMD_BIND_TCP) {
 }
 	socks4_req_hdr_t hdr = {
 		SOCKS4_REQ_VERSION,
-		cmd, port, htonl(0x0000000C),
+		cmd, htons(port), htonl(0x0000000C),
 		0
 	};
 
@@ -161,7 +161,7 @@ if (cmd == EVTSOCK_CMD_BIND_TCP) {
 
 	socks4_req_hdr_t hdr = {
 		SOCKS4_REQ_VERSION,
-		cmd, sin->sin_port, htonl(sin->sin_addr.s_addr),
+		cmd, htons(sin->sin_port), htonl(sin->sin_addr.s_addr),
 		0
 	};
 
