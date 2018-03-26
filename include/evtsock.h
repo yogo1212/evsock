@@ -20,9 +20,9 @@ void evtsock_free(evtsock_t *esock);
 typedef enum {
 	EVTSOCK_CMD_CONNECT_TCP = 1,
 	// TODO implement!
-	EVTSOCK_CMD_BIND_TCP,
+	// EVTSOCK_CMD_BIND_TCP,
 	/* only available for SOCKS5 */
-	EVTSOCK_CMD_BIND_UDP,
+	// EVTSOCK_CMD_BIND_UDP,
 } evtsock_command_t;
 
 typedef enum {
