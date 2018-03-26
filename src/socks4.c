@@ -126,10 +126,7 @@ socks4_request_t *socks4_host(struct bufferevent *bev, const char *hostname, uin
 		cb(EVTSOCK_EVENT_BAD_INPUT, ctx, NULL);
 		return NULL;
 	}
-if (cmd == EVTSOCK_CMD_BIND_TCP) {
-	fprintf(stderr, "unimplemented bind..\n");
-	return NULL;
-}
+
 	socks4_req_hdr_t hdr = {
 		SOCKS4_REQ_VERSION,
 		cmd, htons(port), htonl(0x0000000C),
@@ -156,10 +153,6 @@ socks4_request_t *socks4_ip(struct bufferevent *bev, const struct sockaddr_in *s
 		cb(EVTSOCK_EVENT_BAD_INPUT, ctx, NULL);
 		return false;
 	}
-if (cmd == EVTSOCK_CMD_BIND_TCP) {
-	fprintf(stderr, "unimplemented bind..\n");
-	return NULL;
-}
 
 	socks4_req_hdr_t hdr = {
 		SOCKS4_REQ_VERSION,
