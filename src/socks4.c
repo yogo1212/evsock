@@ -113,6 +113,8 @@ static void socks4_connect_read(struct bufferevent *bev, void *ctx)
 
 	res.bev = bev;
 	bufferevent_setcb(bev, NULL, NULL, NULL, NULL);
+	bufferevent_setwatermark(bev, EV_READ, 0, 0);
+	bufferevent_disable(bev, EV_READ | EV_WRITE);
 
 	r->cb(EVTSOCK_EVENT_SUCCESS, r->ctx, &res);
 	free(r);
