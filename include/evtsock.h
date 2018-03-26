@@ -53,8 +53,8 @@ typedef struct socks4_request socks4_request_t;
 void socks4_request_abort(socks4_request_t *r);
 
 /* NULL indicates ouch */
-socks4_request_t *evtsock_connect4_ip(evtsock_t *esock, const struct sockaddr_in *sin, evtsock_command_t cmd, evtsock_cb_t cb, void *ctx);
+socks4_request_t *evtsock4_connect_ip(evtsock_t *esock, const struct sockaddr_in *sin, evtsock_command_t cmd, evtsock_cb_t cb, void *ctx);
 /* requires SOCKS4a */
-socks4_request_t *evtsock_connect4_hostname(evtsock_t *esock, const char *hostname, uint16_t port, evtsock_command_t cmd, evtsock_cb_t cb, void *ctx);
+socks4_request_t *evtsock4_connect_hostname(evtsock_t *esock, const char *hostname, uint16_t port, evtsock_command_t cmd, evtsock_cb_t cb, void *ctx);
 
 #endif
