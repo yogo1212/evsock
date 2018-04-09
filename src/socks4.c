@@ -55,7 +55,8 @@ static socks4_request_t *create_request(struct bufferevent *bev, bufferevent_dat
 	res->cb = cb;
 	res->ctx = ctx;
 
-	bufferevent_setwatermark(bev, EV_READ, sizeof(socks4_resp_hdr_t), 0);
+	// TODO make sure there's no data from the real destination in the buffer
+	bufferevent_setwatermark(bev, EV_READ, sizeof(socks4_resp_hdr_t), sizeof(socks4_resp_hdr_t));
 	bufferevent_setcb(bev, read_cb, NULL, socks4_event, res);
 	bufferevent_enable(bev, EV_READ | EV_WRITE);
 
