@@ -157,7 +157,7 @@ socks4_request_t *socks4_ip(struct bufferevent *bev, const struct sockaddr_in *s
 
 	socks4_req_hdr_t hdr = {
 		SOCKS4_REQ_VERSION,
-		cmd, htons(sin->sin_port), htonl(sin->sin_addr.s_addr),
+		cmd, sin->sin_port, sin->sin_addr.s_addr,
 		0
 	};
 
