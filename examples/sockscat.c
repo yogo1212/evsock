@@ -323,8 +323,10 @@ static bool parse_args(sc_opts_t *so, int argc, char *argv[])
 	return true;
 }
 
-static const char *config_ssl(evt_ssl_t *essl, SSL_CTX *ssl_ctx)
+static const char *config_ssl(evt_ssl_t *essl, SSL_CTX *ssl_ctx, void *ctx)
 {
+	(void) ctx;
+
 	sockscat_t *sc = evt_ssl_get_ctx(essl);
 
 	if (sc->so.cafile || sc->so.cadir) {
@@ -379,7 +381,6 @@ int main(int argc, char *argv[])
 		sc.so.proxy_host,
 		sc.so.proxy_port,
 		&sc,
-		config_ssl,
 		ssl_error_cb
 	);
 
@@ -388,6 +389,13 @@ int main(int argc, char *argv[])
 		res = EXIT_FAILURE;
 		goto base_cleanup;
 	}
+
+	if (!evt_ssl_reconfigure(sc.essl, config_ssl, NULL)) {
+		fprintf(stderr, "reconfigure failed: %s\n", evt_ssl_get_error_str(sc.essl));
+		res = EXIT_FAILURE;
+		goto cleanup_essl;
+	}
+
 
 	if (sc.so.nossl)
 		evt_ssl_dont_really_ssl(sc.essl);
@@ -429,6 +437,7 @@ past_loop:
 	if (sc.evt_in)
 		event_free(sc.evt_in);
 
+cleanup_essl:
 	evt_ssl_free(sc.essl);
 
 base_cleanup:
