@@ -83,12 +83,13 @@ clean::
 
 #from here on in it's cheap install-stuff. probably rubbish
 
-prefix ?= /usr/local
+ROOT ?= /
+usr ?= usr/local/
 
-INSTALLDIR = $(prefix)/
-LIBINSTALLDIR = $(INSTALLDIR)lib/
-HEADERINSTALLDIR = $(INSTALLDIR)include/
-EXAMPLESINSTALLDIR = $(INSTALLDIR)bin/
+usrdir = $(ROOT)$(usr)
+LIBINSTALLDIR = $(usrdir)lib/
+HEADERINSTALLDIR = $(usrdir)include/
+EXAMPLESINSTALLDIR = $(usrdir)bin/
 
 INSTALL_BIN_CMD=install -m 0755
 
