@@ -1,0 +1,31 @@
+pkgname=libevtsocks-git
+pkgver=0.1_3_gc017b01
+pkgrel=1
+pkgdesc="traverse SOCKS proxies using libevent"
+arch=('x86_64' 'armv7h' 'aarch64')
+url="https://github.com/yogo1212/evtsock"
+provides=('libevtsocks')
+conflicts=('libevtsocks')
+license=('Unlicense')
+makedepends=('git' 'gcc' 'make')
+depends=('libevent')
+source=(git://github.com/yogo1212/evtsock.git)
+sha256sums=('SKIP')
+
+pkgver() {
+  cd evtsock
+
+	git describe --tags | sed 's/^v//' | tr - _
+}
+
+build() {
+  cd evtsock
+
+  make all
+}
+
+package() {
+	cd evtsock
+
+  make install ROOT="$pkgdir/" usr=usr/
+}
